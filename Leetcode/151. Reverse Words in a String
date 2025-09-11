@@ -1,0 +1,114 @@
+Given an input string s, reverse the order of the words.
+Aword is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+Return a string of the words in reverse order concatenated by a single space.
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words.
+Do not include any extra spaces.
+Solution: METHOD -1:
+ Using Split method :
+class Solution {
+    public String reverseWords(String s) {
+        //split string on the basis of space and store it into the array
+        String arr[]=s.split(" ");
+        String result="";
+        //now traverse the array from back and insert it in to the string result
+        for(int i=arr.length-1;i>=0;i--){
+            //for empty string uski length jo particular index pai store hoga arry mai wo zero hoga
+            if(arr[i].length()==0){
+                continue;//kuchh nhi krengai
+
+            }//ab agar word aya toh
+            if(result.length()==0){
+                result+=arr[i];
+            }//ya ab word k waad dusra wor hai toh bitch mai space bhi lga dengai
+            else{
+                result+=" "+arr[i];
+            }
+        }
+        return result;
+        
+    }
+}
+METHOD-2:
+USING STRINGBUILDER :
+class Solution {
+    public String reverseWords(String s) {
+        //split string on the basis of space and store it into the array
+        String arr[]=s.split(" ");
+        //String result="";
+        StringBuilder res=new StringBuilder();
+        //now traverse the array from back and insert it in to the string result
+        for(int i=arr.length-1;i>=0;i--){
+            //for empty string uski length jo particular index pai store hoga arry mai wo zero hoga
+            if(arr[i].length()==0){
+                continue;//kuchh nhi krengai
+
+            }//ab agar word aya toh
+            if(res.length()==0){
+                res.append(arr[i]);
+            }//ya ab word k waad dusra wor hai toh bitch mai space bhi lga dengai
+            else{
+                res.append(" ");
+                res.append(arr[i]);
+            }
+        }
+        return res.toString();
+        
+    }
+}
+
+In Java, the StringBuilder class is used to create mutable (modifiable) sequences of characters.
+
+Normally, String objects are immutable – meaning once created, their content cannot be changed.
+But with StringBuilder, you can append, insert, delete, or modify characters in the same object without creating a new one each time.
+🔹 Functions of StringBuilder in Java:
+
+Mutable String Handling
+
+Allows modification of strings without creating new objects in memory.
+
+Efficient Memory Usage
+Avoids creating multiple intermediate String objects, which happens if you use String with concatenation (+).
+Provides Useful Methods
+append() → add text at the end.
+insert() → insert text at a specific index.
+delete() → remove part of the text.
+reverse() → reverse the string.
+replace() → replace part of the string.
+capacity() → check buffer capacity.
+setCharAt() → modify a character at a specific position.
+
+Faster than String in Modifications
+Best suited for situations where you need to frequently modify strings (like in loops or dynamic text building
+
+METHOD-3:
+SOLVIG IT WITHOUT USING SPLIT FUNCTION OF JAVA AND WITHOUT USING ARRAY
+class Solution {
+    public String reverseWords(String s) {
+        StringBuilder res=new StringBuilder();
+        int StartIndex=s.length()-1;
+        while(StartIndex>=0){//picche sai check krna sunr kiye
+            while(StartIndex>=0 && s.charAt(StartIndex)==' '){ //agar 
+                StartIndex--;
+            }
+            if(StartIndex<0){
+                break;
+            }
+            int endIndex=StartIndex;
+            while(StartIndex>=0 && s.charAt(StartIndex)!=' '){
+                StartIndex--;
+            }
+            //word
+            if(res.length()==0){
+                res.append(s.substring(StartIndex+1,endIndex+1));
+            }else{
+                res.append(" ");
+                res.append(s.substring(StartIndex+1,endIndex+1));
+            }
+        }
+        return res.toString();
+    }
+}
+            
+
+
+
