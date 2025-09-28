@@ -1,0 +1,63 @@
+Brute force:
+class Solution {
+    public String compressedString(String word) {
+        int n=word.length();
+        String comp="";
+        int i=0;
+        
+        while(i<n){
+            char curr=word.charAt(i);
+            int count=0;
+            while(i<n && curr==word.charAt(i) && count<9 ){
+                count++;
+                i++;
+            }
+            comp+=String.valueOf(count);
+            comp+=curr;
+        }
+        return comp;
+        
+    }
+}
+How String works in Java
+
+Strings in Java are immutable.
+
+Every time you do comp += something, Java actually:
+
+Creates a new String object.
+
+Copies the old characters from comp.
+
+Appends the new characters.
+
+Stores the result in a new String.
+
+So, if you’re concatenating inside a loop, it causes a lot of object creation and copying.
+
+🔎 How StringBuilder works
+
+StringBuilder is mutable.
+
+Appending just modifies the internal character array — no new object is created each time.
+
+This makes it much faster when building large strings in loops.
+  Optimal using string builder:
+class Solution {
+    public String compressedString(String word) {
+        int n=word.length();
+        StringBuilder comp=new StringBuilder();
+        int i=0;
+        
+        while(i<n){
+            char curr=word.charAt(i);
+            int count=0;
+            while(i<n && curr==word.charAt(i) && count<9 ){
+                count++;
+                i++;
+            }
+            comp.append(count).append(curr);
+        }
+        return comp.toString();
+    }
+}
