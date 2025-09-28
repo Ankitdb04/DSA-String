@@ -1,0 +1,38 @@
+Input: s = "leetcode"
+Output: 2
+Explanation: The substring "ee" is of length 2 with the character 'e' only.
+Solution:
+class Solution {
+    public int maxPower(String s) {
+        int n=s.length();
+        int i=0;
+        int ans=0;
+        while(i<n){
+            char curr=s.charAt(i);
+            int count =0;
+            while(i<n && curr==s.charAt(i)){
+                count++;
+                i++;
+            }
+            ans=Math.max(count,ans);
+        }
+        return ans;
+    }
+}
+Solution:class Solution {
+    public int maxPower(String s) {
+        int n=s.length();
+        int count=1;
+        int max=1;
+        for(int i=1;i<n;i++){
+            if(s.charAt(i-1)==s.charAt(i)){
+                count++;
+            }else{
+                
+                count=1;
+            }
+            max=Math.max(count,max);
+        }
+        return max;
+    }
+}
