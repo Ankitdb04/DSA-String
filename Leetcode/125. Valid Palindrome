@@ -23,3 +23,38 @@ class Solution {
         return true;
     }
 }
+class Solution {
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+
+        while (left < right) {
+            // move left pointer to next alphanumeric
+            while (left < right && !isAlphaNum(s.charAt(left))) left++;
+            // move right pointer to previous alphanumeric
+            while (left < right && !isAlphaNum(s.charAt(right))) right--;
+
+            // compare case-insensitively without converting entire string
+            if (!equalsIgnoreCase(s.charAt(left), s.charAt(right))) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    // helper: check if char is alphanumeric
+    private boolean isAlphaNum(char c) {
+        return (c >= 'a' && c <= 'z') || 
+               (c >= 'A' && c <= 'Z') || 
+               (c >= '0' && c <= '9');
+    }
+
+    // helper: compare two chars ignoring case (ASCII-based)
+    private boolean equalsIgnoreCase(char a, char b) {
+        if (a >= 'A' && a <= 'Z') a = (char)(a - 'A' + 'a');
+        if (b >= 'A' && b <= 'Z') b = (char)(b - 'A' + 'a');
+        return a == b;
+    }
+}
