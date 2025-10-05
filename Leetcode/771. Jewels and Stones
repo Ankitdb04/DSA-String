@@ -1,0 +1,21 @@
+You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
+
+Letters are case sensitive, so "a" is considered a different type of stone from "A".
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        int i=jewels.length()-1;
+        
+        int count=0;
+        while(i>=0){
+            int j=stones.length()-1;
+            while(j>=0){
+                if(jewels.charAt(i)==stones.charAt(j)){
+                    count++;
+                }
+                j--;
+            }
+            i--;
+        }
+        return count;
+    }
+}
