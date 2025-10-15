@@ -1,0 +1,29 @@
+Brute force:
+class Solution {
+    public char findTheDifference(String s, String t) {
+        int freq[] = new int[26];
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            freq[s.charAt(i) - 'a']++;
+        }
+        for (int j = 0; j < t.length(); j++) {
+            freq[t.charAt(j) - 'a']--;
+        }
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] != 0) {
+                return (char) ('a' + i);
+            }
+        }
+        return ' ';
+    }
+}
+Optimal:->
+class Solution {
+    public char findTheDifference(String s, String t) {
+        char ans=0;
+        for(char ch:s.toCharArray()) ans^=ch;
+        for(char ch:t.toCharArray()) ans^=ch;
+        return ans;
+        
+    }
+}
